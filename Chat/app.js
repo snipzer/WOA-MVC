@@ -5,4 +5,7 @@ window.onload = function ()
 
     alice.setFriend(bob);
     bob.setFriend(alice);
+
+    alice.connect();
+    bob.connect();
 };
