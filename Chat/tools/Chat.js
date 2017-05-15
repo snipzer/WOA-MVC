@@ -2,7 +2,6 @@ function Chat (name) {
     EventEmitter.call(this);
     this.name = name;
     this.online = true;
-    this.emit("connected");
     this.init();
 }
 
@@ -27,11 +26,7 @@ Chat.prototype.init = function ()
         messageContainer.appendChild(newP);
     }).bind(this);
 
-    this.on('connected', function ()
-    {
-
-    })
-
+    this.emit("connected");
 };
 
 
@@ -48,7 +43,19 @@ Chat.prototype.setFriend = function (friend)
 
         messageBox.appendChild(newP);
 
-    }).bind(this))
+    }).bind(this));
+
+    this.friend.on('connected', (function ()
+    {
+        var messageContent = document.querySelector("#"+this.name+"-messages-list");
+
+        var newP = document.createElement("p");
+
+        newP.innerText = this.friend.name+": Is connected";
+
+        messageContent.appendChild(newP);
+
+    }).bind(this));
 };
 
 // Chat.prototype.Connection = function ()
